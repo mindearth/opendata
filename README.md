@@ -1,8 +1,7 @@
 # Mindearth Open Data — STAC Catalog
 
 A [STAC](https://stacspec.org/) catalog of the open datasets released by
-[Mindearth](https://mindearth.ai). The data is hosted on
-[Source Cooperative](https://source.coop/mindearth). This repository holds only
+[Mindearth](https://mindearth.ai). This repository holds only
 the metadata, which describes each dataset and points to its cloud-native files.
 
 ## Datasets
