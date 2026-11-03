@@ -3,7 +3,8 @@
   "stac_version": "1.1.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
-    "https://stac-extensions.github.io/datacube/v2.2.0/schema.json"
+    "https://stac-extensions.github.io/datacube/v2.2.0/schema.json",
+    "https://stac-extensions.github.io/render/v2.1.0/schema.json"
   ],
   "id": "italy-aerial",
   "title": "Italy Aerial Orthophoto (AGEA 2022–2024)",
@@ -82,6 +83,15 @@
       "description": "RGBA orthophoto mosaic in group 0 (native resolution). Alpha = 0 where there is no data."
     }
   },
+  "renders": {
+    "rgb": {
+      "title": "True colour (RGB)",
+      "assets": ["zarr"],
+      "bidx": [1, 2, 3],
+      "rescale": [[0, 255], [0, 255], [0, 255]],
+      "nodata": 0
+    }
+  },
   "assets": {
     "zarr": {
       "href": "https://data.source.coop/mindearth/italy-aerial/italy-aerial.zarr",
@@ -89,6 +99,7 @@
       "title": "Italy aerial orthophoto mosaic (Zarr v3, multiscale)",
       "description": "Sharded Zarr v3 store with consolidated metadata. Group '0' is native resolution (array 'rgba', shape 4 × 2899968 × 2244608, inner chunks 4×1024×1024, shards 4×16384×16384, zstd); groups '1'… are 2× overviews. The HTTP proxy does not list directories: open it as an anonymous S3 store (bucket 'mindearth', prefix 'italy-aerial/italy-aerial.zarr', endpoint https://data.source.coop, region eu-central-1, path-style requests).",
       "roles": ["data"],
+      "data_type": "uint8",
       "proj:code": "EPSG:3857",
       "proj:shape": [2899968, 2244608],
       "proj:transform": [0.597164283559817, 0.0, 732113.8597653955, 0.0, -0.5971642835598172, 5959030.723179791],
