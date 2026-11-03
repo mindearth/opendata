@@ -1,0 +1,39 @@
+{
+  "type": "Catalog",
+  "stac_version": "1.1.0",
+  "id": "mindearth-opendata",
+  "title": "MindEarth Open Data",
+  "description": "Open, cloud-native geospatial datasets released by MindEarth and hosted on Source Cooperative. Each dataset is described as a STAC Collection whose assets point directly to the data on object storage.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json",
+      "title": "MindEarth Open Data"
+    },
+    {
+      "rel": "child",
+      "href": "./collections/italy-aerial/collection.json",
+      "type": "application/json",
+      "title": "Italy Aerial Orthophoto (AGEA 2022–2024)"
+    },
+    {
+      "rel": "child",
+      "href": "./collections/wsf/collection.json",
+      "type": "application/json",
+      "title": "World Settlement Footprint (WSF) Tracker"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/mindearth",
+      "type": "text/html",
+      "title": "MindEarth on Source Cooperative"
+    },
+    {
+      "rel": "about",
+      "href": "https://mindearth.ai",
+      "type": "text/html",
+      "title": "MindEarth"
+    }
+  ]
+}

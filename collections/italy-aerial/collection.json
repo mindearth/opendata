@@ -1,0 +1,149 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v2.2.0/schema.json"
+  ],
+  "id": "italy-aerial",
+  "title": "Italy Aerial Orthophoto (AGEA 2022–2024)",
+  "description": "A seamless, country-wide mosaic of the Italian national orthophotos produced by AGEA (Agenzia per le Erogazioni in Agricoltura), re-published by MindEarth as a cloud-native, sharded Zarr v3 store. Built from AGEA's Web Mercator WMTS tile services (zoom 18, about 40–48 cm/px on the ground) for the 2022, 2023 and 2024 flights, priority-mosaicked so that 2024 wins wherever it has data, then 2023, then 2022. Stored as uint8 RGBA at 0.597 m/pixel in EPSG:3857, with alpha = 0 marking no-data. Basilicata is only available at about 180 cm/px and is upsampled ×4. The mosaic is not radiometrically balanced, so seams between flight years are expected.",
+  "keywords": [
+    "orthophoto",
+    "aerial imagery",
+    "RGB",
+    "Italy",
+    "AGEA",
+    "high-value datasets",
+    "zarr",
+    "cloud-native"
+  ],
+  "license": "CC-BY-4.0",
+  "providers": [
+    {
+      "name": "AGEA – Agenzia per le Erogazioni in Agricoltura",
+      "description": "Producer of the source orthophotos (flights 2022, 2023, 2024). AGEA did not take part in producing this derived dataset and does not endorse it.",
+      "roles": ["producer", "licensor"],
+      "url": "https://agea.gov.it/"
+    },
+    {
+      "name": "MindEarth",
+      "description": "Mosaicking, conversion to Zarr v3 and publication.",
+      "roles": ["processor", "licensor"],
+      "url": "https://mindearth.ai"
+    },
+    {
+      "name": "Source Cooperative",
+      "roles": ["host"],
+      "url": "https://source.coop/mindearth/italy-aerial"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [[6.5767, 35.4651, 18.6178, 47.1038]]
+    },
+    "temporal": {
+      "interval": [["2022-01-01T00:00:00Z", "2024-12-31T23:59:59Z"]]
+    }
+  },
+  "summaries": {
+    "proj:code": ["EPSG:3857"],
+    "gsd": [0.597],
+    "platform": ["aircraft"],
+    "instruments": ["aerial camera"]
+  },
+  "cube:dimensions": {
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "extent": [732113.8597653955, 2072513.5879580292],
+      "step": 0.597164283559817,
+      "reference_system": 3857,
+      "description": "Pixel centres in EPSG:3857 metres"
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "extent": [4227273.410113395, 5959030.723179791],
+      "step": -0.5971642835598172,
+      "reference_system": 3857,
+      "description": "Pixel centres in EPSG:3857 metres, stored north to south"
+    },
+    "band": {
+      "type": "bands",
+      "values": ["red", "green", "blue", "alpha"]
+    }
+  },
+  "cube:variables": {
+    "rgba": {
+      "type": "data",
+      "dimensions": ["band", "y", "x"],
+      "data_type": "uint8",
+      "description": "RGBA orthophoto mosaic in group 0 (native resolution). Alpha = 0 where there is no data."
+    }
+  },
+  "assets": {
+    "zarr": {
+      "href": "https://data.source.coop/mindearth/italy-aerial/italy-aerial.zarr",
+      "type": "application/vnd+zarr; version=3",
+      "title": "Italy aerial orthophoto mosaic (Zarr v3, multiscale)",
+      "description": "Sharded Zarr v3 store with consolidated metadata. Group '0' is native resolution (array 'rgba', shape 4 × 2899968 × 2244608, inner chunks 4×1024×1024, shards 4×16384×16384, zstd); groups '1'… are 2× overviews. The HTTP proxy does not list directories: open it as an anonymous S3 store (bucket 'mindearth', prefix 'italy-aerial/italy-aerial.zarr', endpoint https://data.source.coop, region eu-central-1, path-style requests).",
+      "roles": ["data"],
+      "proj:code": "EPSG:3857",
+      "proj:shape": [2899968, 2244608],
+      "proj:transform": [0.597164283559817, 0.0, 732113.8597653955, 0.0, -0.5971642835598172, 5959030.723179791],
+      "proj:bbox": [732113.8597653955, 4227273.410113395, 2072513.5879580292, 5959030.723179791]
+    },
+    "readme": {
+      "href": "https://data.source.coop/mindearth/italy-aerial/README.md",
+      "type": "text/markdown",
+      "title": "Dataset documentation",
+      "roles": ["metadata"]
+    }
+  },
+  "attribution": "Contains orthophotos © AGEA – Agenzia per le Erogazioni in Agricoltura, voli 2022–2024, CC BY 4.0, modified by MindEarth.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "MindEarth Open Data"
+    },
+    {
+      "rel": "parent",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "MindEarth Open Data"
+    },
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "type": "text/html",
+      "title": "Creative Commons Attribution 4.0 International"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/mindearth/italy-aerial",
+      "type": "text/html",
+      "title": "Dataset page on Source Cooperative"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://data.source.coop/mindearth/italy-aerial/README.md",
+      "type": "text/markdown",
+      "title": "Dataset README"
+    },
+    {
+      "rel": "preview",
+      "href": "https://mindearth.github.io/zarr-viewer/?p=rgb-multiscale&url=https%3A%2F%2Fdata.source.coop%2Fmindearth%2Fitaly-aerial%2Fitaly-aerial.zarr",
+      "type": "text/html",
+      "title": "RGB preview in the MindEarth Zarr viewer"
+    },
+    {
+      "rel": "via",
+      "href": "https://geoportale.agea.gov.it/",
+      "type": "text/html",
+      "title": "Geoportale AGEA (original 20 cm orthophotos)"
+    }
+  ]
+}

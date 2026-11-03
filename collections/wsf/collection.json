@@ -1,0 +1,169 @@
+{
+  "type": "Collection",
+  "stac_version": "1.1.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v2.2.0/schema.json",
+    "https://stac-extensions.github.io/classification/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json"
+  ],
+  "id": "wsf",
+  "title": "World Settlement Footprint (WSF) Tracker",
+  "description": "A global, cloud-native GeoZarr dataset for monitoring settlement dynamics at 10 m resolution. The WSF Tracker records when each pixel was first identified as built-up, updated every six months since July 2016. It was developed by the German Aerospace Center (DLR) and MindEarth, with support from the European Space Agency's Global Development Assistance (GDA) programme, from Sentinel-1 and Sentinel-2 observations processed in Google Earth Engine. The `wsf_tracker` variable (int8) encodes a biannual date index: 0 = nodata, 1 = built-up by July 2016, 2–20 = first built-up in the six-month period ending on the matching date (20 = July 2025 to January 2026). Published as a multiscale pyramid: group 0 is native resolution and must be used for analysis; groups 1–12 are overviews built with `min` aggregation, for browsing only.",
+  "keywords": [
+    "settlements",
+    "built-up area",
+    "urbanization",
+    "land cover change",
+    "Sentinel-1",
+    "Sentinel-2",
+    "global",
+    "geozarr",
+    "zarr",
+    "cloud-native"
+  ],
+  "license": "CC-BY-4.0",
+  "sci:doi": "10.5281/zenodo.20424537",
+  "providers": [
+    {
+      "name": "German Aerospace Center (DLR)",
+      "roles": ["producer"],
+      "url": "https://www.dlr.de/"
+    },
+    {
+      "name": "MindEarth",
+      "description": "Co-developer of the WSF Tracker, conversion to GeoZarr and publication.",
+      "roles": ["producer", "processor", "licensor"],
+      "url": "https://mindearth.ai"
+    },
+    {
+      "name": "Source Cooperative",
+      "roles": ["host"],
+      "url": "https://source.coop/mindearth/wsf"
+    }
+  ],
+  "extent": {
+    "spatial": {
+      "bbox": [[-180.0, -60.01, 180.0, 78.01]]
+    },
+    "temporal": {
+      "interval": [["2016-07-01T00:00:00Z", "2026-01-01T00:00:00Z"]]
+    }
+  },
+  "summaries": {
+    "proj:code": ["EPSG:4326"],
+    "gsd": [10],
+    "platform": ["sentinel-1a", "sentinel-1b", "sentinel-2a", "sentinel-2b"],
+    "constellation": ["sentinel-1", "sentinel-2"]
+  },
+  "cube:dimensions": {
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "extent": [-180.0, 180.0],
+      "step": 8.983152841195216e-05,
+      "reference_system": 4326
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "extent": [-60.01, 78.01],
+      "step": -8.983152841195216e-05,
+      "reference_system": 4326
+    }
+  },
+  "cube:variables": {
+    "wsf_tracker": {
+      "type": "data",
+      "dimensions": ["y", "x"],
+      "data_type": "int8",
+      "description": "Biannual index of the date at which the pixel was first classified as built-up (0 = nodata)."
+    }
+  },
+  "assets": {
+    "zarr": {
+      "href": "https://data.source.coop/mindearth/wsf/World_WSF_20160701-20260101.zarr",
+      "alternate": {
+        "s3": {
+          "href": "s3://us-west-2.opendata.source.coop/mindearth/wsf/World_WSF_20160701-20260101.zarr",
+          "title": "Anonymous S3 access (region us-west-2, unsigned requests)"
+        }
+      },
+      "type": "application/vnd+zarr; version=3",
+      "title": "WSF Tracker GeoZarr (Zarr v3, multiscale)",
+      "description": "Multiscale GeoZarr pyramid. Group '0' is native resolution (variable 'wsf_tracker', shape 1536433 × 4007502); groups '1'–'12' are 'min'-aggregated overviews for browsing only.",
+      "roles": ["data"],
+      "proj:code": "EPSG:4326",
+      "proj:shape": [1536433, 4007502],
+      "proj:transform": [8.983152841195216e-05, 0.0, -180.00001488697754, 0.0, -8.983152841195216e-05, 78.0100585990529],
+      "classification:classes": [
+        {"value": 0, "name": "nodata", "description": "No data", "nodata": true},
+        {"value": 1, "name": "2016-07-01", "description": "Built-up by July 2016 (first observation period)"},
+        {"value": 2, "name": "2017-01-01", "description": "First built-up between July 2016 and January 2017"},
+        {"value": 3, "name": "2017-07-01", "description": "First built-up between January 2017 and July 2017"},
+        {"value": 4, "name": "2018-01-01", "description": "First built-up between July 2017 and January 2018"},
+        {"value": 5, "name": "2018-07-01", "description": "First built-up between January 2018 and July 2018"},
+        {"value": 6, "name": "2019-01-01", "description": "First built-up between July 2018 and January 2019"},
+        {"value": 7, "name": "2019-07-01", "description": "First built-up between January 2019 and July 2019"},
+        {"value": 8, "name": "2020-01-01", "description": "First built-up between July 2019 and January 2020"},
+        {"value": 9, "name": "2020-07-01", "description": "First built-up between January 2020 and July 2020"},
+        {"value": 10, "name": "2021-01-01", "description": "First built-up between July 2020 and January 2021"},
+        {"value": 11, "name": "2021-07-01", "description": "First built-up between January 2021 and July 2021"},
+        {"value": 12, "name": "2022-01-01", "description": "First built-up between July 2021 and January 2022"},
+        {"value": 13, "name": "2022-07-01", "description": "First built-up between January 2022 and July 2022"},
+        {"value": 14, "name": "2023-01-01", "description": "First built-up between July 2022 and January 2023"},
+        {"value": 15, "name": "2023-07-01", "description": "First built-up between January 2023 and July 2023"},
+        {"value": 16, "name": "2024-01-01", "description": "First built-up between July 2023 and January 2024"},
+        {"value": 17, "name": "2024-07-01", "description": "First built-up between January 2024 and July 2024"},
+        {"value": 18, "name": "2025-01-01", "description": "First built-up between July 2024 and January 2025"},
+        {"value": 19, "name": "2025-07-01", "description": "First built-up between January 2025 and July 2025"},
+        {"value": 20, "name": "2026-01-01", "description": "First built-up between July 2025 and January 2026"}
+      ]
+    },
+    "readme": {
+      "href": "https://data.source.coop/mindearth/wsf/README.md",
+      "type": "text/markdown",
+      "title": "Dataset documentation",
+      "roles": ["metadata"]
+    }
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "MindEarth Open Data"
+    },
+    {
+      "rel": "parent",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "MindEarth Open Data"
+    },
+    {
+      "rel": "license",
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "type": "text/html",
+      "title": "Creative Commons Attribution 4.0 International"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5281/zenodo.20424537",
+      "type": "text/html",
+      "title": "Dataset DOI (Zenodo)"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/mindearth/wsf",
+      "type": "text/html",
+      "title": "Dataset page on Source Cooperative"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://data.source.coop/mindearth/wsf/README.md",
+      "type": "text/markdown",
+      "title": "Dataset README"
+    }
+  ]
+}
